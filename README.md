@@ -43,3 +43,19 @@ npm run db:seed
 ```
 
 Docker credentials: `fintrack` / `admin`
+
+---
+
+## Latest updates
+
+- **Transaction model** added in Prisma with indexes on `date`, `merchant`, `category`, `type`, `date+type`, `date+category`
+- **Seed script** generates **15,000 transactions** + admin user (`admin@gmail.com` / `Admin@123`)
+- **APIs added** (JWT protected):
+  - `GET /api/transactions` — pagination, filters (`q`, `category`, `type`, `dateFrom`, `dateTo`), sorting (`sortBy`, `sortOrder`), `pageSize` max 500
+  - `GET /api/transactions/summary` — `totalIncome`, `totalExpense`, `net`, `byCategory` (calculated in DB)
+- **Auth APIs**: `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/profile`
+- **MVC structure**: `routes` → `controllers` → `services` → `validators`
+- **Validation fix**: empty `category=` / `type=` query params no longer return 400
+- **Error format**: `{ error, details: [{ field, message }] }` for invalid input
+- **Frontend wired** to real APIs via axios (debounced merchant search, loading/error states)
+

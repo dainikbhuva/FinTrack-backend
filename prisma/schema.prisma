@@ -13,3 +13,37 @@ model User {
   password  String
   createdAt DateTime @default(now())
 }
+
+enum TransactionType {
+  income
+  expense
+}
+
+enum TransactionCategory {
+  salary
+  groceries
+  rent
+  dining
+  transport
+  utilities
+  entertainment
+  health
+  transfer
+  other
+}
+
+model Transaction {
+  id       String              @id @default(cuid())
+  date     DateTime
+  amount   Decimal             @db.Decimal(12, 2)
+  type     TransactionType
+  category TransactionCategory
+  merchant String
+
+  @@index([date])
+  @@index([merchant])
+  @@index([category])
+  @@index([type])
+  @@index([date, type])
+  @@index([date, category])
+}

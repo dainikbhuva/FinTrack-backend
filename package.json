@@ -8,8 +8,9 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:seed": "tsx src/seed.ts"
+    "db:push": "prisma db push && prisma generate",
+    "db:seed": "tsx src/seed.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
